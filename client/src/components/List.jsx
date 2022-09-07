@@ -2,6 +2,9 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
+//Components
+import NewItem from "./NewItem";
+
 export default function List() {
 
   const [items, setItems] = useState([]);
@@ -63,6 +66,7 @@ export default function List() {
           </tr>
         </tbody>
       </table>
+      <NewItem items={items} setItems={setItems}/>
     </>
   )
 }
