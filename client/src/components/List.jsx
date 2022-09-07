@@ -4,6 +4,7 @@ import axios from 'axios';
 
 //Components
 import NewItem from "./NewItem";
+import EditItem from "./EditItem";
 
 export default function List() {
 
@@ -56,6 +57,9 @@ export default function List() {
                         >
                           Delete
                         </button>
+                      </td>
+                      <td>
+                        <EditItem item={item} items={items} setItems={setItems}/>
                       </td>
                     </tr>
                   )}
