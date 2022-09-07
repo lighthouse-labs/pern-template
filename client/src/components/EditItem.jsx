@@ -11,22 +11,38 @@ export default function EditItem({ item, items, setItems }) {
   const [user_password, setUserPassword] = useState(item.user_password);
   const [user_is_administrator, setUserIsAdministrator] = useState(item.user_is_administrator);
 
-  const editItem = async () => {
+  // const editItem = async () => {
 
+  //   try {
+  //     const body = { user_name, user_email, user_password, user_is_administrator };
+  //     const response = await fetch(`http://localhost:8001/items/edit/${item.user_id}`, {
+  //       method: "PUT",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(body)
+  //     })
+  //     axios.get(`http://localhost:8001/items/`)
+  //       .then(function (res) {
+  //         setItems([...res.data])
+  //       })
+  //   } catch (err) {
+  //     console.error(err.message)
+  //   }
+  // }
+
+  const editItem = async () => {
     try {
-      const body = { user_name, user_email, user_password, user_is_administrator };
-      const response = await fetch(`http://localhost:8001/items/edit/${item.user_id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
+      const body = {
+        user_name, user_email, user_password, user_is_administrator
+      };
+      const response = await axios.put(`http://localhost:8001/items/edit/${item.user_id}`, body)
+      axios.get(`http://localhost:8001/items`).then(function (res) {
+        setItems([...res.data])
+        console.log("response", response.data)
       })
-      axios.get(`http://localhost:8001/items/`)
-        .then(function (res) {
-          setItems([...res.data])
-        })
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
+
   }
 
 
@@ -66,7 +82,7 @@ export default function EditItem({ item, items, setItems }) {
 
       <button
         type="Submit"
-        onClick={e => editItem(e)}
+        onClick={e => editItem()}
       >
         Edit item
       </button>
