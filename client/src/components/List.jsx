@@ -13,6 +13,14 @@ export default function List() {
       })
   }, [])
 
+  function deleteItem(id) {
+    return axios.delete(`http://localhost:8001/items/delete/${id}`)
+    .then(res => {
+      setItems(items.filter(item => item.user_id !== id))
+      console.log(`Console message: The item with id ${id} has been deleted`)
+    })
+  }
+
 
   return (
     <>
@@ -39,6 +47,13 @@ export default function List() {
                       <td>{item.user_email}</td>
                       <td>{item.user_password}</td>
                       <td>{String(item.user_is_administrator)}</td>
+                      <td>
+                        <button className="button_delete"
+                          onClick={() => deleteItem(item.user_id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
                     </tr>
                   )}
 
